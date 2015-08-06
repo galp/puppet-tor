@@ -5,6 +5,6 @@
     "license": "MIT",
     "summary": "puppet module to setup tor for debian",
     "source": "https://github.com/galp/puppet-tor",
-    "project_page": "https://github.com/galp/puppet-tor"
+    "project_page": "https://github.com/galp/puppet-tor",
     "dependencies": []
 }
