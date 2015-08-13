@@ -11,7 +11,7 @@ class tor (
   $packagelist = ['tor','tor-geoipdb']
   package { $packagelist :
     ensure  => latest,
-    require => Apt::source['tor_apt_repo']
+    require => Apt::Source['tor_apt_repo']
   }
 
   apt::source { 'tor_apt_repo':
