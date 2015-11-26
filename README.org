@@ -1,0 +1,13 @@
+* puppet-tor
+
+a very simple module to install tor on debian from the tor project
+repos.  supports hidden services and non exit relays which is what I
+need on the projects I use it.
+* example hiera
+tor::tor_relay: false
+tor::hidden_service: true
+tor::hidden_service_name: "foo"
+tor::hidden_service_ports:
+  - "22"
+  - "3030"
+
