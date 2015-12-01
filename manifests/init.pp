@@ -1,30 +1,25 @@
 class tor (
-  $gateway               = false,
-  $hidden_service        = true,
-  $tor_relay             = false,
-  $relay_contact_info    = '0xFFFFFFFF Random Person <nobody AT example dot com>',
-  $nickname              = 'sillynickname',
-  $orport                = '9001',
-  $bandwidth_rate        = '100',
-  $bandwidth_burst       = '200',
-  $hidden_service_dir    = 'default',
-  $hidden_service_ports  = 'default',
-  $basename              = 'lol',
-  $ip                    = $::ipaddress_lo,
-  )
+  $gateway               = $tor::params::gateway,
+  $hidden_service        = $tor::params::hidden_service,
+  $tor_relay             = $tor::params::tor_relay,
+  $relay_contact_info    = $tor::params::relay_contact_info,
+  $nickname              = $tor::params::nickname,
+  $orport                = $tor::params::orport,
+  $bandwidth_rate        = $tor::params::bandwidth_rate,
+  $bandwidth_burst       = $tor::params::bandwidth_burst,
+  $hidden_service_dir    = $tor::params::hidden_service_dir,
+  $hidden_service_ports  = $tor::params::hidden_service_ports,
+  $basename              = $tor::params::basename,
+  $ip                    = $tor::params::ip,
+  ) inherits tor::params
 {
-
+  contain tor::apt
   $packagelist = ['tor','tor-geoipdb']
   package { $packagelist :
     ensure  => latest,
-    require => Apt::Source['tor_apt_repo']
+    require => Class['tor::apt']
   }
 
-  apt::source { 'tor_apt_repo':
-    location => 'http://deb.torproject.org/torproject.org',
-    repos    => 'main',
-    key      => 'A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89',
-  }
 
   file { '/etc/tor/torrc':
     ensure  => present,
